@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <title>Meu primeiro aplicativo Veu</title>
+        <script src="../vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            YOYOYOY {{ message}}
+        </div>
+
+        <script>
+            let meudata = {
+                message: 'Olá vue',
+            };
+
+            let app = new Vue({
+                el: '#app',
+                data: meudata,
+            });
+        </script>
+    </body>
+</html>
