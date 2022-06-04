@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Meu primeiro aplicativo Vue</title>
+        <script src="../vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+
+            <h1>ATALHOS: @ = "v-on:", : = "v-bind:" </h1>
+            {{ quepasso }}<br>
+            <button @click="onbotao()">BOTAO</button>
+
+            <select @change="onselect($event)">
+                <option value="abacate">AAAAA</option>
+                <option value="banana">BBBBB</option>
+                <option value="caju">CCCCC</option>
+            </select><br>
+
+            <textarea :rows="linhas"></textarea>
+        </div>
+        <script>
+            let app = new Vue({
+                el: '#app',
+                data:{
+                    quepasso: '',
+                    linhas: 2
+                },
+                methods: {
+                    onbotao: function(){
+                        this.quepasso = 'Clicou no botao';
+                        this.linhas++;
+                    },
+                    onselect: function(event){
+                        this.quepasso = 'Mudou o select';
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
