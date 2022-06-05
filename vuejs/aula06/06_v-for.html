@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>Meu primeiro aplicativo Vue</title>
+        <script src="../vue.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+        <style type="text/css">
+            .risca{
+                text-decoration: line-through;
+            }
+        </style>
+    <body>
+        <div id="app" class="container" style="padding: 20px;">
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="control">
+                    <input class="input"
+                        type="text"
+                        placeholder="Text input"
+                        v-model="novatarefa"
+                        @keyup.enter="add()">
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <th></th>
+                    <th>To-do</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <tr v-for="tarefa in tarefas">
+                        <td><input type="checkbox" v-model="tarefa.feita"></td>
+                        <td :class="{risca: tarefa.feita}">{{ tarefa.tarefa }}</td>
+                        <td>
+                            <button @click="remove(tarefa)">
+                                <span class="icon has-text-info"><i class="fa fa-trash-o"></i></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <script>
+            let app = new Vue({
+                el: '#app',
+                data: {
+                    novatarefa: '',
+                    tarefas: [
+                        {tarefa: 'Lavar a roupa', feita: false},
+                        {tarefa: 'Trocar fralda do neném', feita: true},
+                        {tarefa: 'Passer com o cachorro', feita: false},
+                    ]
+                },
+                methods: {
+                    add: function(){
+                        this.tarefas.push({tarefa: this.novatarefa, feita: false})
+                    },
+                    remove: function(tarefa){
+                        let index = this.tarefas.indexOf(tarefa);
+                        this.tarefas.splice(index, 1);
+                    }
+
+                },
+            });
+        </script>
+    </body>
+</html>
