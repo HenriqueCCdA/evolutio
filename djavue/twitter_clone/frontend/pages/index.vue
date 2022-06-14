@@ -1,5 +1,8 @@
 <template>
+  <div>
   <home :tweets="tweets"></home>
+  <pre>{{logged_user}}</pre>
+  </div>
 </template>
 
 <script>
@@ -25,6 +28,11 @@ export default {
     return {
     }
   },
+  computed: {
+    logged_user (){
+      return this.$store.getters.logged_user;
+    }
+  }
 }
 </script>
 
