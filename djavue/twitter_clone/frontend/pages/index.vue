@@ -28,6 +28,9 @@ export default {
     return {
     }
   },
+  mounted() {
+    window.AppApi = AppApi;
+  },
   computed: {
     logged_user (){
       return this.$store.getters.logged_user;
