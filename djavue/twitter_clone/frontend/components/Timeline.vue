@@ -8,7 +8,7 @@
 
         <v-list-tile-content>
           <v-list-tile-title>
-            <router-link :to="{name: 'user-username', params: {username: 'tweet.author_username'} }"> {{tweet.author_name }} </router-link> /
+            <router-link :to="{name: 'user-username', params: {username: tweet.author_username} }"> {{tweet.author_name }} </router-link> /
             {{tweet.author_username}} /
             {{tweet.created_at | timeago}}
           </v-list-tile-title>

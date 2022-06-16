@@ -1,17 +1,32 @@
 <template>
-  <h1>Isso aqui é a timeline do usuario {{username}}</h1>
+  <viewuser :user="user" :tweets="tweets"></viewuser>
 </template>
 
 <script>
 
+import viewuser from '~/components/ViewUser.vue';
+import AppApi from '~apijs';
+
 export default {
+  components: {
+    viewuser
+  },
   asyncData(context) {
-    return {
-      username: context.params.username
-    }
+    debugger
+    const username = context.params.username;
+    console.log(username)
+    return AppApi.list_tweets(username).then( result => {
+      return {
+        tweets: result.data,
+        user:{
+          username: username
+        }
+      }
+    })
   },
   data () {
-    return {}
+    return {
+    }
   }
 }
 </script>

@@ -19,8 +19,8 @@ const api = {
     list_todos(){
         return get('/api/list_todos');
     },
-    list_tweets(){
-        return get('/api/list_tweets')
+    list_tweets(username){
+        return get('/api/list_tweets', {username: username})
     }
 }
 export default api;

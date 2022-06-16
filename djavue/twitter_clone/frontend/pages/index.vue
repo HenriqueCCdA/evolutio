@@ -16,9 +16,7 @@ export default {
     home
   },
   asyncData(){
-    console.log('asyncData');
     return AppApi.list_tweets().then( result => {
-      console.log('asyncData RETURN');
       return {
         tweets: result.data
       }
