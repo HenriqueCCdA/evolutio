@@ -12,15 +12,14 @@ export default {
     viewuser
   },
   asyncData(context) {
-    debugger
     const username = context.params.username;
-    console.log(username)
-    return AppApi.list_tweets(username).then( result => {
+    return Promise.all([
+      AppApi.get_user_details(username),
+      AppApi.list_tweets(username)
+    ]).then(result => {
       return {
-        tweets: result.data,
-        user:{
-          username: username
-        }
+        user: result[0].data,
+        tweets: result[1].data
       }
     })
   },

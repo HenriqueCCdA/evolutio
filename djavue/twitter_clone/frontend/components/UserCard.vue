@@ -5,7 +5,7 @@
         <v-flex xs7>
           <div>
             <div class="headline">{{user.username}}</div>
-            <div>Penso logo existo</div>
+            <div>{{user.last_tweet}}</div>
           </div>
         </v-flex>
         <v-flex xs5>
@@ -13,7 +13,7 @@
             size="125"
             color="grey ligthen-4"
           >
-            <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg/800px-Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg'>
+            <img :src="user.avatar">
           </v-avatar>
         </v-flex>
       </v-layout>
