@@ -55,8 +55,15 @@ const api = {
         return mockasync({
             username: username,
             avatar: avatar,
-            last_tweet: 'Penso, logo existo'
+            last_tweet: 'Penso, logo existo',
+            ifollow: true
         });
+    },
+    follow(username){
+        return mockasync();
+    },
+    unfollow(username){
+        return mockasync();
     },
     list_tweets(username){
         const d = new Date();

@@ -21,6 +21,15 @@ const api = {
     },
     list_tweets(username){
         return get('/api/list_tweets', {username: username})
+    },
+    get_user_detail(username){
+        return get('/api/get_user_details', {username: username})
+    },
+    follow(username){
+        return post('/api/follow', {username: username})
+    },
+    unfollow(username){
+        return unpost('/api/unfollow', {username: username})
     }
 }
 export default api;
