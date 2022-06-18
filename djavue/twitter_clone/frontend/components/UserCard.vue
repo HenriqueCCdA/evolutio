@@ -28,12 +28,16 @@
 <script>
 
 import AppApi from '~apijs';
+import Snacks from '~/helpers/Snacks.js';
 
 export default {
   props: ['user'],
   data () {
     return {
-      loading: false
+      loading: false,
+      snackbar: false,
+      snackmessage: '',
+      snackcolor: 'success'
     }
   },
   computed: {
@@ -47,6 +51,8 @@ export default {
       AppApi.follow(this.user.username).then(() => {
         this.user.ifollow = true;
         this.loading = false;
+        Snacks.show(this.$store, {
+          text: 'Vc está seguindo ' + this.user.username});
       });
 
     },
@@ -55,8 +61,17 @@ export default {
       AppApi.unfollow(this.user.username).then(() => {
         this.user.ifollow = false;
         this.loading = false;
+        Snacks.show(this.$store, {
+          text: 'Vc deixou de seguir ' + this.user.username,
+          color: 'error',
+          timeout: 3000});
       });
-    }
+    },
+    // snackshow(texto, color){
+    //   this.snackbar = true;
+    //   this.snackmessage = texto;
+    //   this.snackcolor = color || 'success';
+    // }
   }
 }
 </script>

@@ -4,7 +4,7 @@ from django.http.response import HttpResponse, JsonResponse
 from django.contrib import auth
 from commons.django_model_utils import get_or_none
 from commons.django_views_utils import ajax_login_required
-from core.service import log_svc, todo_svc
+from core.service import log_svc, todo_svc, tweeter_svc
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -56,17 +56,29 @@ def list_todos(request):
 
 
 def list_tweets(request):
-    tweets = [
-            {
-              'id': 1,
-              'author_name': 'Issac Newton',
-              'author_username': '@isaacnewthon',
-              'author_avatar': 'https://upload.wikimedia.org/wikipedia/commons/8/83/Sir_Isaac_Newton_%281643-1727%29.jpg',
-              'created_at': '43 min',
-              'text': 'A tendência dos corpos, quando  nehuma força é exercida sobre eles, é permanecer em seu estado natural, ou seja, repouso ou movimento retilíne e uniforme',
-            }
-    ]
+    tweets = tweeter_svc.list_tweets(request.user)
     return JsonResponse(tweets, safe=False)
+
+
+@ajax_login_required
+def follow(request):
+    username = request.POST['username']
+    tweeter_svc.follow(request.user, username)
+    return JsonResponse({})
+
+
+@ajax_login_required
+def unfollow(request):
+    username = request.POST['username']
+    tweeter_svc.unfollow(request.user, username)
+    return JsonResponse({})
+
+
+@ajax_login_required
+def tweet(request):
+    text = request.POST['text']
+    tweeter_svc.tweet(request.user, text)
+    return JsonResponse({})
 
 
 def _user2dict(user):
