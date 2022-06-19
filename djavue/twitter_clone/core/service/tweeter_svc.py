@@ -1,20 +1,29 @@
+from core.models import Seguindo, Tweet, User
+
+
 def follow(user, username):
-    pass
+    userpara = User.objects.get(username=username)
+
+    if Seguindo.objects.filter(de=user, para=userpara).count() == 0:
+        Seguindo.objects.create(de=user, para=userpara)
+
 
 def unfollow(user, username):
-    pass
+    userpara = User.objects.get(username=username)
+    Seguindo.objects.filter(de=user, para=userpara).delete()
+
 
 def tweet(user, text):
-    pass
+    return Tweet.objects.create(user=user, text=text)
 
-def list_tweets(user):
-    return [
-        {
-            'id': 1,
-            'author_name': 'Issac Newton',
-            'author_username': '@isaacnewthon',
-            'author_avatar': 'https://upload.wikimedia.org/wikipedia/commons/8/83/Sir_Isaac_Newton_%281643-1727%29.jpg',
-            'created_at': '43 min',
-            'text': 'A tendência dos corpos, quando  nehuma força é exercida sobre eles, é permanecer em seu estado natural, ou seja, repouso ou movimento retilíne e uniforme',
-        }
-    ]
+
+def list_tweets(logged_user, username):
+    if username:
+        tweets = Tweet.objects.filter(user__username=username)
+    else:
+        if logged_user:
+            tweets = Tweet.objects.filter(user__in=User.objects.filter(seguindo_para__de=logged_user))
+        else:
+            tweets = Tweet.objects.all()
+    tweets = tweets.order_by('-created_at')
+    return [t.to_dict_json() for t in tweets]
