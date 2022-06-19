@@ -1,14 +1,12 @@
 <template>
   <div>
-  <home :tweets="tweets"></home>
-  <pre>{{logged_user}}</pre>
+    <home :tweets="tweets"></home>
   </div>
 </template>
 
 <script>
 
 import home from '~/components/Home.vue';
-
 import AppApi from '~apijs';
 
 export default {

@@ -59,6 +59,16 @@ const api = {
             ifollow: true
         });
     },
+    tweet(text){
+        return mockasync({
+            id: 1000,
+            author_name: logged_user.username,
+            author_username: logged_user.username,
+            author_avatar: 'https://upload.wikimedia.org/wikipedia/commons/8/83/Sir_Isaac_Newton_%281643-1727%29.jpg',
+            created_at: new Date().toISOString(),
+            text: text,
+        });
+    },
     follow(username){
         return mockasync();
     },

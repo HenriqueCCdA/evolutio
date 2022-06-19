@@ -1,6 +1,6 @@
 <template>
   <v-list two-line>
-    <template v-for="tweet in tweets">
+    <template v-for="tweet in sortedTweets">
       <v-list-tile avatar>
         <v-list-tile-avatar>
           <img :src="tweet.author_avatar">
@@ -26,6 +26,11 @@ export default {
   props: ['tweets'],
   data (){
     return {}
+  },
+  computed: {
+    sortedTweets(){
+      return this.tweets.concat().sort((t1, t2) => new Date(t2.created_at) - new Date(t1.created_at));
+    }
   }
 }
 </script>
