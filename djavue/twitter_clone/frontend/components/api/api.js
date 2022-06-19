@@ -22,7 +22,7 @@ const api = {
     list_tweets(username){
         return get('/api/list_tweets', {username: username})
     },
-    get_user_detail(username){
+    get_user_details(username){
         return get('/api/get_user_details', {username: username})
     },
     follow(username){
