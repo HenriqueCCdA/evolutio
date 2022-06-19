@@ -1,5 +1,5 @@
 from core.models import Seguindo, Tweet, User
-
+from django.db.models import Q
 
 def follow(user, username):
     userpara = User.objects.get(username=username)
@@ -14,7 +14,8 @@ def unfollow(user, username):
 
 
 def tweet(user, text):
-    return Tweet.objects.create(user=user, text=text)
+    tweet = Tweet.objects.create(user=user, text=text)
+    return tweet.to_dict_json()
 
 
 def list_tweets(logged_user, username):
@@ -22,7 +23,10 @@ def list_tweets(logged_user, username):
         tweets = Tweet.objects.filter(user__username=username)
     else:
         if logged_user:
-            tweets = Tweet.objects.filter(user__in=User.objects.filter(seguindo_para__de=logged_user))
+            tweets = Tweet.objects.filter(
+                Q(user__in=User.objects.filter(seguindo_para__de=logged_user)) |
+                Q(user=logged_user)
+            )
         else:
             tweets = Tweet.objects.all()
     tweets = tweets.order_by('-created_at')

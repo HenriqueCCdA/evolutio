@@ -73,8 +73,8 @@ def unfollow(request):
 @ajax_login_required
 def tweet(request):
     text = request.POST['text']
-    tweeter_svc.tweet(request.user, text)
-    return JsonResponse({})
+    tweet = tweeter_svc.tweet(request.user, text)
+    return JsonResponse(tweet)
 
 
 def _user2dict(user):
